@@ -62,19 +62,20 @@
     const noBtn = document.getElementById('noBtn');
     const advice = document.getElementById('advice');
 
-    let noSize = 1; // scale factor for shrinking
-
-    noBtn.addEventListener('click', () => {
-      noSize -= 0.1;
-      if (noSize <= 0.2) {
-        noSize = 0.2; // minimum size
-      }
-      noBtn.style.transform = `scale(${noSize})`;
-    });
+    let yesSize = 1; // scale factor for shrinking
 
     yesBtn.addEventListener('click', () => {
+      yesSize -= 0.1;
+      if (yesSize <= 0.2) {
+        yesSize = 0.2; // minimum size
+        yesBtn.textContent = "No choice...";
+      }
+      yesBtn.style.transform = `scale(${yesSize})`;
+    });
+
+    noBtn.addEventListener('click', () => {
       advice.style.display = 'block';
-      advice.textContent = "Healing takes time, but choosing to move forward opens the door to peace and new beginnings.";
+      advice.textContent = "It’s okay to admit you haven’t moved on yet — but remember, letting go is the first step toward healing and peace.";
     });
   </script>
 </body>
