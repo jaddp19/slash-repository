@@ -40,11 +40,15 @@
       background-color: #dc3545;
       color: white;
     }
-    #advice {
-      margin-top: 30px;
+    #reaction, #advice {
+      margin-top: 20px;
       font-size: 1.2rem;
-      color: #343a40;
       text-align: center;
+      display: none;
+    }
+    #characterGif {
+      margin-top: 20px;
+      max-width: 200px;
       display: none;
     }
   </style>
@@ -55,27 +59,50 @@
     <button id="yesBtn">Yes</button>
     <button id="noBtn">No</button>
   </div>
+  <img id="characterGif" src="" alt="Reaction GIF">
+  <div id="reaction"></div>
   <div id="advice"></div>
 
   <script>
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
     const advice = document.getElementById('advice');
+    const reaction = document.getElementById('reaction');
+    const characterGif = document.getElementById('characterGif');
 
     let yesSize = 1; // scale factor for shrinking
+    let yesClicks = 0; // counter for clicks
 
     yesBtn.addEventListener('click', () => {
+      yesClicks++; // increment counter
+
       yesSize -= 0.1;
       if (yesSize <= 0.2) {
         yesSize = 0.2; // minimum size
         yesBtn.textContent = "No choice...";
       }
       yesBtn.style.transform = `scale(${yesSize})`;
+
+      // Show curious GIF reaction
+      characterGif.style.display = 'block';
+      characterGif.src = "https://media1.tenor.com/m/ktQmSQl3GvoAAAAd/kataman-cat.gif";
+      reaction.style.display = 'block';
+      reaction.textContent = "Ohh.... really?? DON'T LIEEEEE!!!";
+      advice.style.display = 'none';
+
+      // Hide button after 5 clicks
+      if (yesClicks >= 5) {
+        yesBtn.style.display = 'none';
+      }
     });
 
     noBtn.addEventListener('click', () => {
+      // Show crying GIF reaction
+      characterGif.style.display = 'block';
+      characterGif.src = "https://media.tenor.com/I5bwJxpmFAsAAAAj/crying-sad.gif";
+      reaction.style.display = 'none';
       advice.style.display = 'block';
-      advice.textContent = "It’s okay to admit you haven’t moved on yet — but remember, letting go is the first step toward healing and peace.";
+      advice.textContent = "It’s okay to admit you haven’t moved on yet but remember, letting go is the first step toward healing and peace.";
     });
   </script>
 </body>
